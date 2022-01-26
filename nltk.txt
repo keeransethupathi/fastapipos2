@@ -1,4 +1,4 @@
-tokenizer
+tokenize
 word_tokenize
 pos_tag
 tag
