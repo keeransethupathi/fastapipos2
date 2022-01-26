@@ -1,9 +1,8 @@
-import nltk
+from textblob import TextBlob
 from fastapi import FastAPI
 from sqlmodel import Session, SQLModel, select
 from models import Pos
 from create_db import engine
-
 
 
 def create_db_and_tables():
@@ -24,9 +23,8 @@ def pos_tag(pos: Pos):
         session.commit()
         session.refresh(pos)
         sentence = pos.sentence
-        tokens = nltk.word_tokenize(sentence)
-        tagged = nltk.pos_tag(tokens)
-        return tagged
+        blob_object = TextBlob(sentence)
+        return blob_object.tags
 
 @app.get("/pos/")
 def read_poses():
