@@ -24,10 +24,10 @@ def pos_tag(pos: Pos):
         session.add(pos)
         session.commit()
         session.refresh(pos)
-        text_string = pos.sentence
-        blob_object = TextBlob(text_string)
-        tag = blob_object.tags
-        return tag
+    text_string = pos.sentence
+    blob_object = TextBlob(text_string)
+    tag = blob_object.tags
+    return tag
 
 @app.get("/pos/")
 def read_poses():
