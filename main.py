@@ -1,4 +1,4 @@
-import nltk
+import nltk; nltk.download()
 from fastapi import FastAPI
 from sqlmodel import Session, SQLModel, select
 from models import Pos
