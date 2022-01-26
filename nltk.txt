@@ -1,2 +1,4 @@
+tokenize
+tag
 word_tokenize
 pos_tag
