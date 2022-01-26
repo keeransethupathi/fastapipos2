@@ -1,2 +1,1 @@
-nltk.tag
-nltk.tokenize
+punkt
