@@ -18,7 +18,7 @@ def on_startup():
     create_db_and_tables()
 
 
-@app.post("/pos/")
+@app.post("/poss/")
 def pos_tag(pos: Pos):
     with Session(engine) as session:
         session.add(pos)
