@@ -26,7 +26,7 @@ def pos_tag(pos: Pos):
         text_string = pos.sentence
         tag = nlp(text_string)
         for token in tag:
-            return token, token.lemma_
+            return (token, token.lemma_)
 
 @app.get("/pos/")
 def read_poses():
