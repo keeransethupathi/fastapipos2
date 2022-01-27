@@ -25,7 +25,7 @@ def pos_tag(pos: Pos):
         session.refresh(pos)        
         text_string = pos.sentence
         doc = nlp(text_string)
-        tokens = [token, token.pos_ for token in doc]
+        tokens = [token.pos_ for token in doc]
         return tokens
 
 @app.get("/pos/")
