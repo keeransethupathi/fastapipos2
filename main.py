@@ -1,7 +1,7 @@
 from textblob import TextBlob
 from fastapi import FastAPI
 from sqlmodel import Session, SQLModel, select
-
+import spacy
 from models import Pos
 from create_db import engine
 
@@ -11,7 +11,7 @@ def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
 
 app = FastAPI()
-
+nlp = spacy.load("en_core_web_sm")
 
 @app.on_event("startup")
 def on_startup():
@@ -23,11 +23,11 @@ def pos_tag(pos: Pos):
     with Session(engine) as session:
         session.add(pos)
         session.commit()
-        session.refresh(pos)
-    text_string = pos.sentence
-    blob_object = TextBlob(text_string)
-    tag = blob_object.tags
-    return tag
+        session.refresh(pos)        
+        text_string = pos.sentence
+        tag = nlp(text_string)
+        for token in tag:
+        print(token, token.lemma_)
 
 @app.get("/pos/")
 def read_poses():
