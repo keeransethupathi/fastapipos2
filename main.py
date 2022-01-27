@@ -23,10 +23,10 @@ def pos_tag(pos: Pos):
         session.add(pos)
         session.commit()
         session.refresh(pos)        
-    text_string = pos.sentence
-    tag = nlp(text_string)
-    for token in tag:
-         print(token, token.lemma_)
+        text_string = pos.sentence
+        doc = nlp(text_string)
+        tokens = [token.text for token in doc]
+        return tokens
 
 @app.get("/pos/")
 def read_poses():
