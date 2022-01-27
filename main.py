@@ -5,7 +5,9 @@ from sqlmodel import Session, SQLModel, select
 from models import Pos
 from create_db import engine
 
-	@@ -11,7 +11,7 @@ def create_db_and_tables():
+
+
+def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
 
 app = FastAPI()
@@ -13,7 +15,11 @@ app = FastAPI()
 
 @app.on_event("startup")
 def on_startup():
-	@@ -23,11 +23,11 @@ def pos_tag(pos: Pos):
+    create_db_and_tables()
+
+
+@app.post("/poss/")
+def pos_tag(pos: Pos):
     with Session(engine) as session:
         session.add(pos)
         session.commit()
